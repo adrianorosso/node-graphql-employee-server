@@ -86,17 +86,3 @@ npm run start
 ```
 
 - Go to http://localhost:4000 and test the operations.
-
-### Comments and assumptions
-
-1. Although contractors and employees are very similar entities for this scope, in my opinion is better to treat them as 2 totally separated
-   entities. This way it'll be easier to add diferent properties and methods to each of them and keep the common properties in the member
-   (working as an abstract class).
-2. Contractor and Employee tables have their own IDs, but just the member ID is considered for the operations.
-
-### Improvements opportunities
-
-As future improvements for the project, I would suggest the following:
-
-- Put the prisma client in a context or convert to singleton.
-- Add pagination to the methods that list many results.
