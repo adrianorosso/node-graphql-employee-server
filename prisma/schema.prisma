@@ -1,0 +1,38 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum MemberType {
+  CONTRACTOR
+  EMPLOYEE
+}
+
+model Member {
+  id         Int          @id @default(autoincrement())
+  name       String
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  type       MemberType
+  tags       String[]
+  contractor Contractor[]
+  employee  Employee[]
+}
+
+model Contractor {
+  id       Int    @id @default(autoincrement())
+  duration Int
+  member   Member @relation(fields: [memberId], references: [id])
+  memberId Int    @unique
+}
+
+model Employee {
+  id       Int    @id @default(autoincrement())
+  role     String
+  member   Member @relation(fields: [memberId], references: [id])
+  memberId Int    @unique
+}

@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  employee-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: employee-api
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@employee-db:5432/employee_db
+    ports:
+      - 4000:4000
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+
+  postgres:
+    image: postgres
+    container_name: employee-db
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: employee_db
+    restart: always
+    ports:
+      - 5433:5432
+    env_file:
+      - .env
